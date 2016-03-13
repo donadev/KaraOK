@@ -26,10 +26,10 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-   '*': (req, res, next) => {
-       let model = req.options.controller || req.options.model;
-       let action = req.options.action;
-       let method = Utils.findAction("../policies/controllers", model, "policy", action);
+   '*': function(req, res, next) {
+       var model = req.options.controller || req.options.model;
+       var action = req.options.action;
+       var method = Utils.findAction("../policies/controllers", model, "policy", action);
        if(method != null) method(req, res, next);
        else next();
    },
