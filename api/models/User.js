@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-      username: "string",
+      username: {type: "string", required: true},
       games: {collection: "game"}
   },
   getRandom() {
