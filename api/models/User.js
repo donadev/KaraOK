@@ -11,13 +11,14 @@ module.exports = {
       username: {type: "string", required: true},
       games: {collection: "game"}
   },
-  getRandom() {
+  getRandom(user_id) {
       var self = this;
       return this.count().then((value) => {
           var random = Math.floor(Math.random() * value);
           if(random < 0) random = 0;
-
-          return self.find({skip: random, limit: 1});
+          let params = {skip: random};
+          if(user_id != null) params.where = {"!": {id: user_id}};
+          return self.find(params);
       });
   }
 };

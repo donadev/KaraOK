@@ -8,6 +8,9 @@
 module.exports = {
 
 	beginMatch(request, response) {
-		User.getRandom().then(response.ok).catch(response.error);
+		User.getRandom().then((users) => {
+			if(_.isEmpty(users)) response.notFound("No user available");
+			else response.ok(users[0]);
+		}).catch(response.serverError);
 	}
 };
